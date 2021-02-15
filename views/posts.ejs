@@ -1,0 +1,24 @@
+<%- include('partials/header.ejs') -%>
+
+<a href="/">Add a new meme <i class="fas fa-arrow-circle-left"></i></a>
+<div class="post">
+  
+  <% for(i = meme.length - 1; i >=  Math.max(0, meme.length - 100); i--) { %>
+  <div class="meme">
+    <div class="right">
+
+      <h1> <%= meme[i].name %></h1>
+      <p> <%= meme[i].date %> <%= meme[i].time %></p>
+      
+    </div>
+    
+    <img src='<%= meme[i].url %>'>
+
+    <p class="caption"><%= meme[i].caption %></p>
+    
+  </div>
+  <% } %>
+
+</div>
+
+<%- include('partials/footer.ejs') -%>

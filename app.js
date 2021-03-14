@@ -2,20 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const dotenv = require("dotenv")
 // const findOrCreate = require('mongoose-findorcreate');
+dotenv.config()
 
 const app = express();
 
 app.set('view engine', 'ejs');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb+srv://@cluster0.br9bq.mongodb.net/blogDB?retryWrites=true&w=majority', {
-  user: "admin-prawar",
-  pass: "0zhPz2qMLCN8T34H",
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+mongoose.connect("mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.eqa6r.mongodb.net/xmemeDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.set('useCreateIndex', true);
 
@@ -30,8 +28,6 @@ const postSchema = new mongoose.Schema({
 // postSchema.plugin(findOrCreate);
 
 const Post = new mongoose.model('Post', postSchema);
-
-
 
 app.get('/', function(req, res){
   res.render('home');
@@ -55,7 +51,6 @@ app.post('/', function(req, res){
       console.log(err);
     }
     else{
-      console.log(meme);
       res.redirect('/posts');
     }
   })
@@ -74,7 +69,6 @@ app.get('/posts', function(req, res){
     }
   })
 
-
 })
 
 app.get('/memes', function(req, res){
@@ -92,9 +86,6 @@ app.get('/memes', function(req, res){
 })
 
 app.post('/memes', function(req,res){
-
-  console.log('h');
-  console.log(req.body);
   
   var d = new Date();
 
@@ -102,8 +93,8 @@ app.post('/memes', function(req,res){
     name: req.body.name,
     caption: req.body.caption,
     url: req.body.url,
-    time: d.toLocaleTimeString(),
-    date: d.toLocaleDateString()
+    time: d.toLocaleTimeString("en-US", {timeZone: "Asia/Kolkata"}),
+    date: d.toLocaleDateString("en-US", {timeZone: "Asia/Kolkata"})
   })
 
   meme.save(function(err){
@@ -112,11 +103,9 @@ app.post('/memes', function(req,res){
       console.log(err);
     }
     else{
-      console.log(meme);
       res.redirect('/posts');
     }
   })
-
 
 })  
 
@@ -133,20 +122,13 @@ app.get('/memes/:id', function(req, res){
     }
     else{
       result.forEach(function(postk){
-
-        // console.log(postk._id);
-        // console.log(typeof(postk));
         if(postk._id == reqID){
-          
-          console.log(postk);
           flag = true;
           return res.send(postk);
         }
       })
     }
   })
-
-  // res.send('not found');
 })
 
 app.listen(process.env.PORT || 8081, function(){

@@ -1,29 +1,31 @@
 <%- include('partials/header.ejs') -%>
 
 <section class="form-area">
-   <h1><b>Meme Stream</b></h1>
-   <br>
-   <form action="/" method="POST">
-     <div class="form-group mb-3">
-       <label for="name" class="form-label">Meme owner</label>
-       <input type="text" class="form-control" id="name" placeholder="Enter your full name." name="name" required>
-     </div>
-     <div class="form-group mb-3">
-       <label for="caption" class="form-label">Caption</label>
-       <input type="text" class="form-control" id="caption" placeholder="Be creative with your caption" name="caption" required>
-     </div>
-     <div class="form-group mb-3">
-       <label for="url" class="form-label" name="url">Meme URL</label>
-       <input type="url" id="url" class="form-control" placeholder="Enter URL of your meme here." name="url" required>
-     </div>
-     <br>
-     <div class="col-12">
-       <button type="submit" class="btn btn-dark">Submit meme!</button>
-     </div>
-   </form>
+  <h1><b>Meme Stream</b></h1>
+  <br>
+  <form action="/" method="POST">
+    <div class="form-group mb-3">
+      <label for="name" class="form-label">Meme owner</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter your full name." name="name" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="caption" class="form-label">Caption</label>
+      <input type="text" class="form-control" id="caption" placeholder="Be creative with your caption" name="caption" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="url" class="form-label" name="url">Meme URL</label>
+      <input type="url" id="url" class="form-control" placeholder="Enter URL of your meme here." name="url" required>
+    </div>
+    <br>
+    <div class="col-12">
+      <button type="submit" class="btn btn-dark">Submit meme!</button>
+    </div>
+  </form>
 
- </section>
- <a href="/posts">
+</section>
+<p class="footer">Copyright ©️ Karan Saraswat 2021</p>
+
+<a href="/posts">
   <i class="fas fa-arrow-circle-right"></i>
   Posts
 </a>
